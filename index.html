@@ -1,0 +1,171 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>GGL-Simulation</title>
+  <!-- materialize icons, css & js -->
+  <link type="text/css" href="/css/materialize.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link type="text/css" href="/css/styles.css" rel="stylesheet">
+  <script type="text/javascript" src="/js/materialize.min.js"></script>
+  <link rel="manifest" href="/manifest.json">
+  <!-- ios support -->
+  <link rel="apple-touch-icon" href="/img/icons/icon-96x96.png">
+  <meta name="apple-mobile-web-app-status-bar" content="#a4f8b6">
+  <meta name="theme-color" content="#a4f8b6">
+  <script src="https://kit.fontawesome.com/2b457a8931.js" crossorigin="anonymous"></script>
+</head>
+<body class="grey lighten-4">
+
+  <!-- top nav -->
+  <nav class="z-depth-0">
+    <div class="nav-wrapper container">
+      <a href="/">Assumption on <span>BEP Calculation of BX</span></a>
+      <!-- <span class="right grey-text text-darken-1">
+        <i class="material-icons sidenav-trigger" data-target="side-menu">menu</i>
+      </span> -->
+    </div>
+  </nav>
+
+  <!-- add recipe side nav -->
+  <!-- <div id="side-form" class="sidenav side-form">
+    <form class="add-recipe container section" autocomplete="off">
+      <h6 >New Recipe</h6>
+      <div class="divider"></div>
+      <div class="input-field">
+        <input placeholder="e.g. Ninja soup" id="title" type="text" class="validate">
+        <label for="title">Recipe Title</label>
+      </div>
+      <div class="input-field">
+        <input placeholder="e.g. Tofu, mushroom, garlic" id="ingredients" type="text" class="validate">
+        <label for="ingredients">Ingredients</label>
+      </div>
+      <div class="input-field center">
+        <button class="btn-small">Add</button>
+      </div>
+    </form>
+  </div> -->
+  <div id="side-form" class="sidenav side-form">
+    <form class="add-recipe container section" autocomplete="off">
+      <div class="recipe-title">Master Cost</div>
+      <div></div>
+      <div class="recipe-ingredients">
+        <label for="title">Feed Cost</label>
+        <input id="feed1"  type="number" class="validate">
+      </div>
+      <div class="recipe-ingredients">
+        <label for="title">Med Cost</label>
+        <input id="med1"  type="number" class="validate">
+      </div>
+      <div class="recipe-ingredients">
+        <label for="title">Labour Cost</label>
+        <input id="labour1"  type="number" class="validate">
+      </div>
+      <div class="recipe-ingredients">
+        <label for="title">FOH</label>
+        <input id="foh1"  type="number" class="validate">
+      </div>
+      <div class="recipe-ingredients">
+        <label for="title">OPEX + Interest</label>
+        <input id="opex1"  type="number" class="validate">
+      </div>
+      <div class="center">
+        <a style="border-radius:15px" id="btn_update" class="btn-small btn-large update-btn tabcontent-trigger" data-target="Home" data-id="">
+          UPDATE
+        </a>
+      </div>
+      
+      <div style="width:100%;margin-top:15px;">
+        <a id="success_dlg" style="width:100%;border-radius:5px;visibility: hidden;" class="btn-small btn-large add-btn">
+          Success
+        </a>
+      </div>
+    </form>
+  </div>
+
+  <!-- side nav -->
+  <!-- <ul id="side-menu" class="sidenav side-menu">
+    <li><a class="subheader">BEP Calculation of BX</a></li>
+    <li><a href="/" class="waves-effect">
+      <i class="material-icons">home</i>BEP Simulation</a>
+    </li>
+    <li><a href="/pages/upload.html" class="sidenav-trigger">
+      <i class="material-icons">file_upload</i>Upload Files</a>
+    </li> -->
+    <!-- <li><a class="btn-floating btn-small btn-large add-btn sidenav-trigger" data-target="side-form">Setting Cost</a></li>
+    <li><a href="/pages/about.html" class="waves-effect">About</a></li>
+    <li><div class="divider"></div></li>
+    <li><a href="/pages/contact.html" class="waves-effect">
+      <i class="material-icons">mail_outline</i>Contact</a>
+    </li> --> 
+  </ul>
+
+  <button class="tablink" onclick="openPage('Home', this, 'green')" id="defaultOpen">BEP Price (Rp/Kg)</button>
+  <button class="tablink" onclick="openPage('News', this, 'green')" >Cattle Price (USD/Kg)</button>
+  <button class="tablink" onclick="openPage('About', this, 'green')" >BEP Price Exc. BM 5% (Rp/Kg)</button>
+  <!-- <button class="tablink" onclick="openPage('Contact', this, 'green')">Historical Cost</button> -->
+  <!-- <button class="tablink" onclick="openPage('About', this, 'green')">New</button> -->
+
+  <div id="Home" class="tabcontent">
+    <div class="recipeshome container grey-text text-darken-1">
+    </div>
+  </div>
+
+  <div id="News" class="tabcontent">
+    <div class="recipeshome1 container grey-text text-darken-1">
+    </div>
+  </div>
+
+  <div id="Contact" class="tabcontent">
+    <div style="width:100%;height:100%;overflow-x: scroll;overflow-y: scroll;">
+      <body>
+        <div class="top-bar">
+            <button class="btn" id="prev-page">
+                <i class="fas fa-arrow-circle-left"></i>Prev Page 
+            </button>
+            <button class="btn" id="next-page">
+                Next Page<i class="fas fa-arrow-circle-right"></i> 
+            </button>
+            <span class="page-info">
+                Page <span id="page-num"></span> of <span id="page-count"></span>
+            </span>
+        </div>
+
+        <canvas id="pdf-render"></canvas>
+
+        <script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
+        <script src="js/main.js"></script>
+      </body>
+    </div>
+  </div>
+  <div id="About" class="tabcontent">
+    <div class="recipeshome2 container grey-text text-darken-1">
+    </div>
+  </div>
+  <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-analytics.js"></script>
+    <script>
+      var firebaseConfig = {
+        apiKey: "AIzaSyDUOYdE3ddmPuGln5nGsE7nP-o5IYSQDyY",
+        authDomain: "food-ninja-pwa-545a2.firebaseapp.com",
+        databaseURL: "https://food-ninja-pwa-545a2.firebaseio.com",
+        projectId: "food-ninja-pwa-545a2",
+        storageBucket: "food-ninja-pwa-545a2.appspot.com",
+        messagingSenderId: "62614125041",
+        appId: "1:62614125041:web:377e5f6ea89b13f90c2c50",
+        measurementId: "G-G3F8X4JLVN"
+      };
+      firebase.initializeApp(firebaseConfig);
+      firebase.analytics();
+      const db = firebase.firestore();
+    </script>
+
+  <script src="/js/app.js"></script>
+  <script src="/js/db.js"></script>
+  <script src="/js/ui_home.js"></script>
+  <!-- <script src="/js/ui.js"></script> -->
+  <!-- <script src="/js/ui_master_cost.js"></script> -->
+</body>
+</html>
